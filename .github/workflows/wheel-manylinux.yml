@@ -49,9 +49,8 @@ jobs:
       fail-fast: false
 
       matrix:
+        python-version: ["3.10"]
         image:
-          - manylinux1_x86_64
-          - manylinux1_i686
           - musllinux_1_1_x86_64
           - manylinux_2_24_x86_64
           - manylinux_2_24_i686
@@ -60,16 +59,21 @@ jobs:
           - manylinux_2_31_aarch64
           - manylinux_2_35_x86_64
           - manylinux_2_35_aarch64
+        include:
+          - image: manylinux1_x86_64
+            python-version: "3.9"
+          - image: manylinux1_i686
+            python-version: "3.9"
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up Python 3.10
+    - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
-        python-version: "3.10"
+        python-version: ${{ matrix.python-version }}
 
     - name: Building wheel
       run: |
