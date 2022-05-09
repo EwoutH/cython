@@ -15,7 +15,12 @@ MANYLINUX_IMAGES= \
 	manylinux_2_24_i686 \
 	manylinux_2_24_aarch64 \
 #	manylinux_2_24_ppc64le \
-#	manylinux_2_24_s390x
+#	manylinux_2_24_s390x \
+	manylinux_2_31_x86_64 \
+	manylinux_2_31_aarch64 \
+	manylinux_2_35_x86_64 \
+	manylinux_2_35_aarch64
+
 
 all:    local
 
