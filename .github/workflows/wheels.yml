@@ -42,7 +42,7 @@ permissions:
 
 jobs:
   build_wheels:
-    name: Build wheel for ${{ matrix.python }}-${{ matrix.buildplat[1] }}
+    name: Build wheels for ${{ matrix.python }}-${{ matrix.buildplat[1] }}
     if: >-
       github.event_name == 'release' ||
       github.event_name == 'schedule' ||
@@ -57,28 +57,28 @@ jobs:
         # Github Actions doesn't support pairing matrix values together, let's improvise
         # https://github.com/github/feedback/discussions/7835#discussioncomment-1769026
         buildplat:
-        - [ubuntu-22.04, *linux*]
-        - [macos-11, macosx_*64]
-        - [windows-2022, win*]
+        - [ubuntu-22.04, "*linux*"]
+        - [macos-11, "macosx_*64"]
+        - [windows-2022, "win*"]
         python: ["cp36", "cp37", "cp38", "cp39", "cp310", "cp311"]  # Note: Wheels not needed for PyPy
     steps:
       - name: Checkout Cython
         uses: actions/checkout@v3
         
       - name: Set up QEMU
-        if: contains(matrix.buildplat[1], '_aarch64')
+        if: contains(matrix.buildplat[0], 'ubuntu')
         uses: docker/setup-qemu-action@v2
         with:
           platforms: arm64
       
-      - name: Build wheels
+      - name: Build wheels for ${{ matrix.python }}-${{ matrix.buildplat[1] }}
         uses: pypa/cibuildwheel@v2.11.2
         env:
           # TODO: Build Cython with the compile-all flag?
           CIBW_BUILD: ${{ matrix.python }}-${{ matrix.buildplat[1] }}
           CIBW_PRERELEASE_PYTHONS: True
           CIBW_ARCHS_LINUX: auto aarch64
-          CIBW_SKIP_LINUX: *-musllinux_i686
+          CIBW_SKIP_LINUX: "*-musllinux_i686"
           CIBW_ARCHS_MACOS: x86_64 arm64
           CIBW_ARCHS_WINDOWS: auto ARM64
           CIBW_ENVIRONMENT: CFLAGS='-O3 -g0 -mtune=generic -pipe -fPIC' LDFLAGS='-fPIC'
