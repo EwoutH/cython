@@ -81,7 +81,7 @@ jobs:
           CIBW_BUILD: cp*-${{ matrix.buildplat[1] }}
           CIBW_PRERELEASE_PYTHONS: True
           CIBW_ARCHS_LINUX: auto aarch64
-          CIBW_ARCHS_MACOS: x86_64 aarch64
+          CIBW_ARCHS_MACOS: x86_64 arm64
           CIBW_ARCHS_WINDOWS: auto ARM64
           CIBW_ENVIRONMENT: CFLAGS='-O3 -g0 -mtune=generic -pipe -fPIC' LDFLAGS='-fPIC'
           # TODO: Cython tests take a long time to complete
