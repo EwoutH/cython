@@ -13,7 +13,7 @@ name: Wheel Builder
 on:
   push:
     paths:
-      - ".github/workflows/wheels.yml"
+      - .github/workflows/wheels.yml
   release:
     types: [created]
   schedule:
