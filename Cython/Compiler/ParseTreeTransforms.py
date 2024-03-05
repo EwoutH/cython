@@ -1731,7 +1731,7 @@ class _HandleGeneratorArguments(VisitorTransform, SkipDeclarations):
             # but use it as a starting point
             name_source = self.tag_count
             self.tag_count += 1
-            name = EncodedString(".{}".format(name_source))
+            name = EncodedString(f".{name_source}")
             def_node = self.gen_node.def_node
             if not def_node.local_scope.lookup_here(name):
                 from . import Symtab

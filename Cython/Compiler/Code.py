@@ -142,10 +142,10 @@ class IncludeCode:
 
         if include:
             if include[0] == '<' and include[-1] == '>':
-                self.pieces[0] = '#include {}'.format(include)
+                self.pieces[0] = f'#include {include}'
                 late = False  # system include is never late
             else:
-                self.pieces[0] = '#include "{}"'.format(include)
+                self.pieces[0] = f'#include "{include}"'
 
         if verbatim:
             self.pieces[self.order] = verbatim

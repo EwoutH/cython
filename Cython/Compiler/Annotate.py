@@ -296,7 +296,7 @@ class AnnotationCCodeWriter(CCodeWriter):
                               title=AnnotationCCodeWriter.COMPLETE_CODE_TITLE,
                            ))
             complete_code_as_html = self._htmlify_code(self.buffer.getvalue(), "c/cpp")
-            outlist.append("<pre class='cython code'>{code}</pre>".format(code=complete_code_as_html))
+            outlist.append(f"<pre class='cython code'>{complete_code_as_html}</pre>")
             outlist.append("</div></p>")
 
         return outlist

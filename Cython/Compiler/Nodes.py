@@ -6027,7 +6027,7 @@ class AssignmentNode(StatNode):
         rhs_t = rhs.type
         lhs_t = lhs.type
         if rhs_t.is_ptr and rhs_t.base_type.is_const and lhs_t.is_ptr and not lhs_t.base_type.is_const:
-            warning(self.pos, "Assigning to '{}' from '{}' discards const qualifier".format(lhs_t, rhs_t), level=1)
+            warning(self.pos, f"Assigning to '{lhs_t}' from '{rhs_t}' discards const qualifier", level=1)
 
     def _check_const_assignment(self, node):
         if isinstance(node, AssignmentNode):

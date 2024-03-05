@@ -2932,7 +2932,7 @@ class CPtrType(CPointerBaseType):
                     if src_name is None:
                         src_name = "the value being assigned"
                     else:
-                        src_name = "'{}'".format(src_name)
+                        src_name = f"'{src_name}'"
                     msg += f" Suggest adding 'noexcept' to the type of {src_name}."
                 return msg
         return super().assignment_failure_extra_info(src_type, src_name)

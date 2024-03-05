@@ -236,7 +236,7 @@ class DistutilsInfo:
                 line = line[1:].lstrip()
                 kind = next((k for k in ("distutils:","cython:") if line.startswith(k)), None)
                 if kind is not None:
-                    key, _, value = [s.strip() for s in line[len(kind):].partition('=')]
+                    key, _, value = (s.strip() for s in line[len(kind):].partition('='))
                     type = distutils_settings.get(key, None)
                     if line.startswith("cython:") and type is None: continue
                     if type in (list, transitive_list):
@@ -538,7 +538,7 @@ def parse_dependencies(source_filename):
             if m_after_from:
                 multiline, one_line = m_after_from.groups()
                 subimports = multiline or one_line
-                cimports.extend("{}.{}".format(cimport_from, s.strip())
+                cimports.extend(f"{cimport_from}.{s.strip()}"
                                 for s in subimports.split(','))
 
         elif cimport_list:
